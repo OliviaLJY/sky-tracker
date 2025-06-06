@@ -1,8 +1,16 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/bknTyRar)
-# Django Practice Assessment
+# ✈️ SkyTracker
 
-__Name:__
+SkyTracker is a global travel sharing platform that allows users around the world to share their travel plans, access detailed airline information, and interact with others through upvotes and comments. Users can also upload relevant travel files and documents, creating a collaborative and informative environment for travelers.
 
-__Computing ID:__
+## 🌍 Key Features
 
-# sky-tracker
+- 🗺️ Share and browse travel plans across countries and continents  
+- ✈️ Explore detailed information on various airlines  
+- 📎 Upload files related to travel (itineraries, guides, documents)  
+- 👍 Engage with the community through upvotes and comments  
+- 🔍 Search and filter posts by destination, airline, or tags  
+
+## 💻 Tech Stack
+
+- **Backend**: Python (Django)
+- **Frontend**: HTML, CSS, JavaScript
