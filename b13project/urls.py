@@ -29,7 +29,6 @@ urlpatterns = [
     path('anonymous-login/', views.anonymous_login, name='anonymous_login'), 
     path('anonymous-project-list/', views.anonymous_project_list, name='anonymous_project_list'),  # Correct path for anonymous login
     path('login/', login_view, name='login'),
-    #path('projects/anonymous/', views.anonymous_project_list, name='anonymous_project_list'),
     path("create_profile/", views.create_user_profile, name="create_user_profile"),
     # PMA STUFF 
     path("pma_dashboard/", views.pma_dashboard, name="pma_dashboard"),  # PMA Dashboard
@@ -40,12 +39,10 @@ urlpatterns = [
     path('delete/<int:file_id>/', views.delete_file, name='delete_file'),
     path("view_profile/", views.view_profile, name="view_profile"),
     path('travel-guide/', views.travel_guide, name='travel_guide'),
-    #path('view-all-member-projs/', views.view_all_member_projs, name='view_all_member_projs'),
     path('project/vote/', views.vote, name='vote'),
-# Add project management URLs
+    # Add project management URLs
     path('projects/owned/', views.your_projects, name='your_projects'),
     path('projects/joined/', views.joined_projects, name='project_list'),
-    #path('projects/', views.project_list, name='project_list'),
     path("projects/<int:project_id>/upload/", views.file_upload, name="project_file_upload"),
     path("projects/create/", views.create_project, name="create_project"),
     path("projects/<int:project_id>/", views.project_detail, name="project_detail"),
