@@ -28,11 +28,6 @@ class CustomSignUpView(SignupView):
         # Save the new user
         user = form.save(self.request)
 
-        # if not user.groups.exists():
-        #     default_group, _ = Group.objects.get_or_create(name='Common User')
-        #     user.groups.add(default_group)
-        #     user.save()
-
         # Manually set the backend to avoid multiple backend issues
         backend = get_backends()[0]  # Assuming the first backend is the correct one
         user.backend = f"{backend.__module__}.{backend.__class__.__name__}"
@@ -62,7 +57,7 @@ def create_user_profile(request):
                 },
             )
 
-        # so we can use this later instead of the "username" which is just the email
+        # We can use this later instead of the "username" which is just the email
         request.user.first_name = real_name
         request.user.save()
 
@@ -170,7 +165,7 @@ def user_dashboard(request):
     # Query projects where the current user is the owner
     owned_projects = Project.objects.filter(owner=request.user)
 
-    # prob also need to show projects where the user is a member
+    # May also need to show projects where the user is a member
     member_projects = Project.objects.filter(members=request.user).distinct()
 
     # Prepare the context with both sets of projects
@@ -341,7 +336,7 @@ def your_projects(request):
     user_votes = Vote.objects.filter(user=request.user)
     vote_dict = {vote.project.id: vote.vote_type for vote in user_votes}
 
-    # apparently this 'user_vote' is a temporary field
+    # Apparently this 'user_vote' is a temporary field
     for project in projects:
         project.user_vote = vote_dict.get(project.id, None)
 
@@ -368,7 +363,7 @@ def landing_page(request):
         return redirect("user_dashboard")  # Redirect to the user dashboard
     return render(request, "landing_page.html")
 
-# view_all_member_projs
+# View_all_member_projs
 def view_all_member_projs(request):
     projects = Project.objects.all().only("title", "owner", "description", "creation_date")
     is_pma = {"is_pma": False, "files": UploadedFile.objects.all()}
