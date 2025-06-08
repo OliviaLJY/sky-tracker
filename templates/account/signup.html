@@ -3,14 +3,14 @@
 {% load socialaccount %}
 
 {% block content %}
-<div class="container mt-5">
+<div id="app" class="container mt-5" xmlns:v-on="http://www.w3.org/1999/xhtml">
   <div class="row justify-content-center">
     <div class="col-md-6">
       <div class="card shadow-sm border-primary">
         <div class="card-body">
           <h2 class="card-title text-center mb-4">Sign up for SkyTracker</h2>
           <p class="text-center text-muted mb-4">"Your journey to the skies starts with a simple sign-up!"</p>
-          <form method="post">
+          <form method="post" v-on:submit.prevent="onSubmit">
             {% csrf_token %}
             {{ form.as_p }}
 
@@ -21,7 +21,12 @@
 
           <div class="text-center">
             <p class="text-muted">Or</p>
-            <a href="{% provider_login_url 'google' %}" class="btn btn-outline-secondary">
+            <!-- Checkbox to choose Google sign-up -->
+            <input type="checkbox" id="google-signup" v-model="showGoogleSignup">
+            <label for="google-signup">Sign up with Google</label>
+
+            <!-- Google sign-up button that depends on checkbox -->
+            <a v-if="showGoogleSignup" href="{% provider_login_url 'google' %}" class="btn btn-outline-secondary">
               <img src="https://img.icons8.com/color/16/000000/google-logo.png" alt="Google Logo" class="mr-2">
               Sign up with Google
             </a>
@@ -32,25 +37,40 @@
   </div>
 </div>
 
+<script>
+new Vue({
+  el: '#app',
+  data: {
+    showGoogleSignup: false  // Controls visibility of the Google sign-up button
+  },
+  methods: {
+    onSubmit: function() {
+      // Handle the form submission here if you need to do anything specific on submit
+      alert('Form submitted!');
+    }
+  }
+});
+</script>
+
 <style>
   body {
     background: linear-gradient(to top, #87CEEB, #FFFFFF);
     min-height: 100vh;
   }
-  
+
   .border-primary {
     border-color: #007bff !important;
   }
-  
+
   .card {
     background-color: #f8f9fa;
   }
-  
+
   .btn-primary {
     background-color: #007bff;
     border-color: #007bff;
   }
-  
+
   .btn-outline-secondary {
     color: #6c757d;
     border-color: #6c757d;

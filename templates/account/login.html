@@ -3,34 +3,33 @@
 {% load socialaccount %}
 
 {% block styles %}
+<style>
   body {
-    background: linear-gradient(to top, #87CEEB, #FFFFFF); 
-    min-height: 100vh; 
+    background: linear-gradient(to top, #87CEEB, #FFFFFF);
+    min-height: 100vh;
   }
-  
   .border-primary {
-    border-color: #007bff !important; 
+    border-color: #007bff !important;
   }
-  
   .card {
-    background-color: #f8f9fa; 
+    background-color: #f8f9fa;
   }
-  
   .btn-primary {
-    background-color: #007bff; 
-    border-color: #007bff; 
+    background-color: #007bff;
+    border-color: #007bff;
   }
-  
   .btn-outline-secondary {
-    color: #6c757d; 
-    border-color: #6c757d; 
+    color: #6c757d;
+    border-color: #6c757d;
   }
   a[href*="accounts/password/reset/"] {
     display: none;
   }
+</style>
 {% endblock %}
 
 {% block content %}
+<div id="app" class="container mt-5">
   <div class="row justify-content-center">
     <div class="col-md-6">
       <div class="card shadow-sm border-primary">
@@ -40,34 +39,17 @@
           <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
-
-            <!-- <div class="form-group mb-3">
-              <div class="custom-control custom-radio">
-                <input type="radio" class="custom-control-input" id="pma_radio" name="role" value="pma_admin">
-                <label class="custom-control-label" for="pma_radio">PMA Administrator</label>
-              </div>
-            </div>
-
-            <div class="form-group mb-3">
-              <div class="custom-control custom-radio">
-                <input type="radio" class="custom-control-input" id="user_radio" name="role" value="user">
-                <label class="custom-control-label" for="user_radio">User</label>
-              </div>
-            </div> -->
-
             <button type="submit" class="btn btn-primary btn-block">Login</button>
           </form>
-          
-          <!-- <div class="text-center mt-3">
-            <p class="text-muted">
-              <a href="{% url 'account_reset_password' %}">Forgot Password?</a>
-            </p>
-          </div> -->
 
-          <form method="post" action="{% url 'anonymous_project_list' %}">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-secondary btn-block mt-3">Continue as Anonymous User</button>
-          </form>
+          <div v-if="showOptions" class="additional-options">
+            <button type="button" class="btn btn-secondary btn-block mt-3" @click="toggleOptions">Hide Options</button>
+            <form method="post" action="{% url 'anonymous_project_list' %}">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-secondary btn-block mt-3">Continue as Anonymous User</button>
+            </form>
+          </div>
+          <button v-else type="button" class="btn btn-info btn-block mt-3" @click="toggleOptions">Show Additional Options</button>
 
           <hr class="my-4">
 
@@ -84,4 +66,18 @@
     </div>
   </div>
 </div>
+
+<script>
+new Vue({
+  el: '#app',
+  data: {
+    showOptions: false
+  },
+  methods: {
+    toggleOptions() {
+      this.showOptions = !this.showOptions;
+    }
+  }
+});
+</script>
 {% endblock %}
