@@ -22,8 +22,8 @@ jmespath==1.0.1
 MarkupSafe==3.0.1
 moto==3.1.19
 packaging==24.2
-Pillow==9.0.1
-psycopg2-binary==2.8.6
+Pillow>=9.5.0
+psycopg2-binary>=2.9.5
 py==1.11.0
 pycparser==2.22
 python-dateutil==2.9.0.post0
